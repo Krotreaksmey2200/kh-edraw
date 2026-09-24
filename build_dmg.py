@@ -78,7 +78,12 @@ def main():
         sys.exit(1)
         
     print(f"Successfully built: {APP_PATH}")
-    print("Applying ad-hoc code-signing to bundle...")
+    print("Cleaning dist-info metadata and applying ad-hoc code-signing to bundle...")
+    for p in (APP_PATH / "Contents" / "Frameworks").glob("*.dist-info"):
+        shutil.rmtree(p, ignore_errors=True)
+    for p in (APP_PATH / "Contents" / "Frameworks").glob("*.egg-info"):
+        shutil.rmtree(p, ignore_errors=True)
+        
     subprocess.run(["xattr", "-cr", str(APP_PATH)], check=False)
     subprocess.run(["codesign", "--force", "--deep", "--sign", "-", str(APP_PATH)], check=True)
     
