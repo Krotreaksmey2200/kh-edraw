@@ -1,6 +1,7 @@
 # core/auth.py
 # Quản lý đăng nhập Google OAuth2, lưu Refresh Token qua Keyring, lấy userinfo.
 from __future__ import annotations
+import os
 import base64
 import html as _html
 import json

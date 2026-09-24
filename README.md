@@ -88,11 +88,11 @@
    python3 main.py
    ```
 
-4. 📦 ការបង្កើត Installer macOS (`khedraw.pkg`):
+4. 💿 ការបង្កើត macOS DMG Installer (`khedraw.dmg`):
    ```bash
-   python3 build_pkg.py
+   python3 build_dmg.py
    ```
-   *(វានឹងបង្កើតឯកសារ `khedraw.pkg` ដោយស្វ័យប្រវត្តិ ដែលអាចយកទៅដំឡើងលើ macOS ចូលទៅកាន់ `/Applications` ភ្លាមៗ)*
+   *(វានឹងបង្កើតឯកសារ `khedraw.dmg` ដែលអាចបើកឡើងរួច Drag & Drop `khedraw.app` ចូលទៅកាន់ `/Applications` លើ macOS ភ្លាមៗ)*
 
 ---
 
@@ -101,7 +101,8 @@
 ```text
 kh-edraw/
 ├── README.md                 # ឯកសារណែនាំគម្រោង
-├── build_pkg.py              # Script សម្រាប់ build កម្មវិធីជា macOS .pkg Installer
+├── build_dmg.py              # Script សម្រាប់ build macOS Drag-and-Drop .dmg Installer
+├── build_pkg.py              # Script សម្រាប់ build macOS .pkg Installer
 ├── .gitignore                # កំណត់ឯកសារដែលមិនបញ្ចូលទៅក្នុង Git
 └── eDraw_project/            # កូដប្រភពនៃកម្មវិធីចម្បង
     ├── main.py               # ចំណុចចាប់ផ្តើមនៃកម្មវិធី (Entry Point)
