@@ -76,3 +76,4 @@ edraw_texstudio_export.tex
 eDraw.app/
 eDraw_extracted/
 eDraw_recovered/
+*.pkg

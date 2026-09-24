@@ -17,18 +17,23 @@ def app_icon_path():
     root = _resource_root()
     if sys.platform == 'win32':
         candidates = (
+            root / 'assets' / 'khedraw.ico',
+            root / 'assets' / 'khedraw_logo.png',
             root / 'assets' / 'iconEDraw.ico',
             root / 'assets' / 'iconEDraw.png',
         )
     elif sys.platform == 'darwin':
         candidates = (
+            root / 'assets' / 'khedraw.icns',
+            root / 'assets' / 'khedraw_logo.png',
             root / 'assets' / 'iconEDraw.icns',
             root / 'assets' / 'iconEDraw.png',
         )
     else:
         candidates = (
+            root / 'assets' / 'khedraw_logo.png',
             root / 'assets' / 'iconEDraw.png',
-            root / 'assets' / 'iconEDraw.ico',
+            root / 'assets' / 'khedraw.ico',
         )
     for path in candidates:
         if path.is_file():

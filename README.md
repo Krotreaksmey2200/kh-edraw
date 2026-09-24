@@ -1,6 +1,7 @@
-# 🎨 eDraw Khmer (kh-edraw)
+# 🎨 eDraw Khmer (kh-edraw / khedraw)
 
 <p align="center">
+  <img src="eDraw_project/assets/khedraw_logo.png" width="160" height="160" alt="khedraw Logo" style="border-radius: 28px;" /><br><br>
   <b>ក្តារខៀនឌីជីថលឆ្លាតវៃ ជំនួយការបង្រៀន និងចងក្រងគណិតវិទ្យា/រូបវិទ្យាជាមួយ LaTeX, TikZ & Gemini AI</b><br>
   <i>Smart Educational Whiteboard with Full LaTeX, TikZ & Gemini AI Integration for Khmer Educators</i>
 </p>
@@ -87,6 +88,12 @@
    python3 main.py
    ```
 
+4. 📦 ការបង្កើត Installer macOS (`khedraw.pkg`):
+   ```bash
+   python3 build_pkg.py
+   ```
+   *(វានឹងបង្កើតឯកសារ `khedraw.pkg` ដោយស្វ័យប្រវត្តិ ដែលអាចយកទៅដំឡើងលើ macOS ចូលទៅកាន់ `/Applications` ភ្លាមៗ)*
+
 ---
 
 ## 📂 រចនាសម្ព័ន្ធគម្រោង (Project Structure)
@@ -94,10 +101,12 @@
 ```text
 kh-edraw/
 ├── README.md                 # ឯកសារណែនាំគម្រោង
+├── build_pkg.py              # Script សម្រាប់ build កម្មវិធីជា macOS .pkg Installer
 ├── .gitignore                # កំណត់ឯកសារដែលមិនបញ្ចូលទៅក្នុង Git
 └── eDraw_project/            # កូដប្រភពនៃកម្មវិធីចម្បង
     ├── main.py               # ចំណុចចាប់ផ្តើមនៃកម្មវិធី (Entry Point)
     ├── main_window.py        # ផ្ទាំងបង្អួចមេ (Main Window)
+    ├── assets/               # រូបតំណាងកម្មវិធី (Logo & Icons: .icns, .png)
     ├── actions/              # Mixins សម្រាប់គ្រប់គ្រងសកម្មភាព (AI, Files, Modes...)
     ├── config/               # គំរូ LaTeX, TikZ និងស្ទីល (Templates & Preamble)
     ├── core/                 # ម៉ាស៊ីនគំនូរ, LaTeX Engine, Gemini AI integration
