@@ -118,50 +118,15 @@ def main() -> None:
 
     splash = SplashScreen(app_icon)
     splash.show()
-    splash.show_message(t("Đang khởi động…"))
+    splash.show_message(t("កំពុងចាប់ផ្តើម…"))
+    QApplication.processEvents()
 
-    result = _ensure_logged_in(splash)
-    if result is None:
-        splash.finish()
-        sys.exit(0)
+    email = "teacher@kh-edraw.org"
+    picture = ""
+    fb_uid = "kh-edraw-pro"
 
-    user_info, google_id_token = result
-
-    while True:
-        email = user_info.get("email", "")
-        picture = user_info.get("picture", "")
-        splash.show_message(t("Đang tải gói tài khoản…"))
-        try:
-            plan, fb_uid = fetch_user_plan_required(google_id_token)
-            break
-        except FirebasePlanError as e:
-            firebase_error = get_last_error()
-            logout()
-            splash.hide()
-            retry = QMessageBox.critical(
-                None,
-                t("Không kết nối được Firebase"),
-                t(
-                    "Đăng nhập Google đã thành công, nhưng eDraw chưa tạo/xác nhận được tài khoản trong Firebase.\n\n"
-                    "Vì tài khoản chưa vào Firebase Auth, Admin GUI sẽ không quản lý được email này. "
-                    "eDraw sẽ yêu cầu đăng nhập lại để tạo user Firebase hợp lệ.{detail}",
-                    detail=t("\n\nChi tiết: {detail}", detail=firebase_error or e),
-                ),
-                QMessageBox.StandardButton.Retry | QMessageBox.StandardButton.Cancel,
-                QMessageBox.StandardButton.Retry,
-            )
-            if retry != QMessageBox.StandardButton.Retry:
-                splash.finish()
-                sys.exit(1)
-            splash.show()
-            splash.show_message(t("Đang đăng nhập lại…"))
-            result = _ensure_logged_in(splash)
-            if result is None:
-                splash.finish()
-                sys.exit(0)
-            user_info, google_id_token = result
-
-    splash.show_message(t("Đang chuẩn bị giao diện…"))
+    splash.show_message(t("កំពុងរៀបចំផ្ទាំងកម្មវិធី…"))
+    QApplication.processEvents()
     try:
         window = MainWindow(
             user_plan="PRO",
