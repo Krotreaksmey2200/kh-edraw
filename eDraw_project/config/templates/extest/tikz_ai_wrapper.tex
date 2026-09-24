@@ -1,0 +1,42 @@
+% ═══════════════════════════════════════════════════════════════════════
+% ឈ្មោះឯកសារ: tikz_ai_wrapper.tex
+% ការពិពណ៌នា: ទម្រង់ Standalone សម្រាប់ចងក្រងកូដរូបភាព TikZ AI ជាមួយពុម្ពអក្សរខ្មែរ
+% ═══════════════════════════════════════════════════════════════════════
+
+\documentclass[tikz, border=3pt]{standalone}
+\usepackage{amsmath,amssymb,yhmath,mathrsfs}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{tikz-3dplot,tkz-tab}
+\usetikzlibrary{shapes.geometric,arrows,snakes,shadows,backgrounds,decorations.text,shapes}
+\usetikzlibrary{calc,intersections,angles,patterns,patterns.meta,backgrounds,positioning}
+\usetikzlibrary{decorations.pathmorphing,fadings,shadings}
+
+\usepackage{fontspec}
+\IfFontExistsTF{Khmer OS}{%
+  \setmainfont{Khmer OS}%
+}{%
+  \IfFontExistsTF{Noto Sans Khmer}{%
+    \setmainfont{Noto Sans Khmer}%
+  }{%
+    \IfFontExistsTF{Khmer Sangam MN}{%
+      \setmainfont{Khmer Sangam MN}%
+    }{}%
+  }%
+}
+\providecommand{\khmermain}{}
+\providecommand{\khmerfont}{}
+\providecommand{\khmer}{}
+
+\tikzset{
+    marker/.style={thick},
+    markerblack/.style={black},
+    markerblue/.style={blue},
+    markerred/.style={red},
+    markergreen/.style={green!70!black},
+}
+
+\begin{document}
+% __TIKZ_BODY__
+\end{document}

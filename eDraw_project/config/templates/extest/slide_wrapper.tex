@@ -1,0 +1,117 @@
+% ═══════════════════════════════════════════════════════════════════════
+% ឈ្មោះឯកសារ: slide_wrapper.tex
+%
+% ការពិពណ៌នា: ទម្រង់ Standalone សម្រាប់ចងក្រងសំណួរ/លំហាត់នីមួយៗ \begin{ex}
+%             ចេញជារូបភាពស្លាយ — រាល់លំហាត់នីមួយៗត្រូវបានរុំក្នុងស៊ុម tcolorbox + tikz។
+%
+% Placeholder ខ្លឹមសារ: SLIDE_BODY (ជំនួសដោយស្វ័យប្រវត្តិក្នង \begin{document})
+% ═══════════════════════════════════════════════════════════════════════
+
+\documentclass[tikz]{standalone}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb,yhmath,mathrsfs}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage{tikz-3dplot,tkz-tab}
+\usetikzlibrary{shapes.geometric,arrows,snakes,shadows,backgrounds,decorations.text,shapes}
+\usetikzlibrary{calc,intersections,angles,patterns,backgrounds,positioning}
+\usetikzlibrary{decorations.pathmorphing,fadings,shadings}
+\usepackage{bbding,pifont}
+\usepackage{enumerate}
+\usepackage{makecell}
+\usepackage{framed}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{skins,breakable,theorems}
+\colorlet{tcbcol@back}{tcbcolback}
+\colorlet{tcbcol@frame}{tcbcolframe}
+\usepackage{esvect}
+\def\vec{\vv}
+\def\overrightarrow{\vv}
+
+% កញ្ចប់ ex_test និងការកំណត់ពុម្ពអក្សរខ្មែរ
+\usepackage[dethi]{ex_test}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{Khmer OS}{\setmainfont{Khmer OS}}{%
+    \IfFontExistsTF{Noto Sans Khmer}{\setmainfont{Noto Sans Khmer}}{%
+      \IfFontExistsTF{Khmer Sangam MN}{\setmainfont{Khmer Sangam MN}}{}%
+    }%
+  }
+\fi
+\renewcommand{\nameex}{\color{violet}លំហាត់}
+\renewcommand{\namebt}{\color{blue}លំហាត់}
+\renewcommand{\namevd}{\color{red}ឧទាហរណ៍}
+
+% ── ពណ៌ (Color Palette) ──────────────────────────────────────────────
+\definecolor{FrameNavy}   {RGB}{20,  60, 130}
+\definecolor{BgSlide}     {RGB}{240, 245, 255}
+\definecolor{AccentGold}  {RGB}{200, 150,  20}
+
+% ── កំណត់ទំហំរូបភាព tikzpicture ក្នុងខ្លឹមសារលំហាត់ ──────────────────
+% រូប TikZ នីមួយៗត្រូវបានចាប់យកដាក់ក្នុង lrbox ហើយ \resizebox នឹងបង្រួម/ពង្រីកមកទំហំដែលបានកំណត់។
+\newlength{\SlideTikzPictureWidth}
+\newlength{\SlideTikzPictureHeight}
+\setlength{\SlideTikzPictureWidth}{5cm}
+\setlength{\SlideTikzPictureHeight}{3cm}
+\newsavebox{\SlideTikzBox}
+
+% ── កំណត់ឡើងវិញនូវ ex: លំហាត់នីមួយៗ = tikzpicture + tcolorbox ─────────
+\RenewEnviron{ex}{%
+  \begin{tikzpicture}
+    \node[scale=1] {%
+      \begin{tcolorbox}[
+        width=16cm,
+        enhanced,
+        %colback=BgSlide,
+        colframe=FrameNavy,
+        arc=7pt,
+        boxrule=1.5pt,
+        left=12pt, right=12pt, top=10pt, bottom=10pt,
+        drop shadow={black!25, shadow xshift=2pt, shadow yshift=-2pt},
+        fonttitle=\bfseries\color{FrameNavy},
+      ]
+      % Group {} កំណត់ដែនកំណត់នៃការ redefine៖ គ្រប់ tikzpicture ខាងក្នុង \BODY នឹង
+      % ត្រូវបានរុំដោយស្វ័យប្រវត្តិតាមរយៈ savebox + resizebox
+      {%
+        \let\OrigTikzPicture\tikzpicture
+        \let\endOrigTikzPicture\endtikzpicture
+        \renewenvironment{tikzpicture}[1][]{%
+          \begin{lrbox}{\SlideTikzBox}%
+            \OrigTikzPicture[##1]%
+          }{%
+          \endOrigTikzPicture%
+          \end{lrbox}%
+          \resizebox{\SlideTikzPictureWidth}{\SlideTikzPictureHeight}{%
+            \usebox{\SlideTikzBox}%
+          }%
+        }%
+        \BODY
+      }%
+      \end{tcolorbox}%
+    };
+  \end{tikzpicture}%
+}
+
+% ── ពាក្យបញ្ជាជំនួយ (Utility Commands) ───────────────────────────────
+\def\circF#1{}
+\def\circT#1{(#1)}
+\newcommand{\hoac}[1]{\left[\begin{aligned}#1\end{aligned}\right.}
+\newcommand{\heva}[1]{\left\{\begin{aligned}#1\end{aligned}\right.}
+\def\cautn{}
+\def\cauds{}
+\def\caukq{}
+\def\cautl{}
+\newenvironment{name}[2]{}{}
+\renewcommand{\loigiai}[2][]{}        % លាក់ដំណោះស្រាយនៅលើស្លាយ
+\newenvironment{indapan}[2]{}{}
+\renewcommand{\shortans}[2][]{\begin{flushright}\scalebox{2.0}{$\square\square\square\square$}\end{flushright}}	
+\renewcommand{\baselinestretch}{1.4}
+
+\begin{document}
+
+\setcounter{ex}{0}
+% __SLIDE_BODY__
+
+\end{document}
